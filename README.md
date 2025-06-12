@@ -20,11 +20,11 @@ The Invoice Reimbursement System is an AI-powered application that automates the
 ## Screenshots
 
 ### Invoice Analysis Interface
-![Analysis Tab]([![FfwVhQa.md.png](https://iili.io/FfwVhQa.md.png)](https://freeimage.host/i/FfwVhQa))  
+![Analysis Tab](examples/analyze.png)  
 *Upload policy PDF and invoices ZIP for automated analysis*
 
 ### Chat Query Interface
-![Chat Tab](https://ibb.co/gZ72cYJH)  
+![Chat Tab](examples/query.png)  
 *Natural language querying of past reimbursements*
 
 ## Example Files
