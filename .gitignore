@@ -1,0 +1,11 @@
+venv312*/
+chroma_db/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.env
+.env.local
+*.key
+*.pem
