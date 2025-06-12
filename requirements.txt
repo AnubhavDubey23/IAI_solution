@@ -8,16 +8,20 @@ langchain-google-genai
 
 python-dotenv
 
-protobuf
+protobuf==3.20.3  
 # PDF Processing
 PyPDF2
 # Vector Database
-chromadb
-sentence-transformers
+chromadb==0.4.24
+sentence-transformers==2.2.2
 
 # Machine Learning
-torch
+torch==2.2.1
 # Additional Utilities
 requests
 python-multipart
 uuid
+
+duckdb==0.9.2
+pypika==0.48.9
+posthog==2.4.2

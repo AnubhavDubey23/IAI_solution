@@ -1,20 +1,47 @@
 import chromadb
+from chromadb import Client
+from chromadb.config import Settings
 from chromadb.utils import embedding_functions
+from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
 from sentence_transformers import SentenceTransformer
 from typing import Dict, List, Optional
 from datetime import datetime
 from app.models.schemas import AnalysisResult
+import os
 
 class VectorStore:
-    def __init__(self, persist_path: str = "./chroma_db"):
-        self.embedder = SentenceTransformer('all-MiniLM-L6-v2')
-        self.client = chromadb.PersistentClient(path=persist_path)
-        self.collection = self.client.get_or_create_collection(
-            name="invoice_analyses",
-            embedding_function=embedding_functions.SentenceTransformerEmbeddingFunction(
-                model_name="all-MiniLM-L6-v2"
+    def __init__(self, persist_path: str = None):
+        # Use temp directory if no path specified
+        if persist_path is None:
+            persist_path = os.path.join(os.getcwd(), "chroma_db")
+        
+        # Create directory if it doesn't exist
+        os.makedirs(persist_path, exist_ok=True)
+        
+        try:
+            embedding_fn = SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+            
+            # ✅ NEW CLIENT INITIALIZATION
+            self.client = Client(
+                Settings(
+                    persist_directory=persist_path,
+                    anonymized_telemetry=False
+                )
             )
-        )
+            
+            # Get or create collection with embedding function
+            self.collection = self.client.get_or_create_collection(
+                name="invoice_analyses",
+                embedding_function=embedding_fn
+            )
+
+        except Exception as e:
+            # Clean up if initialization fails
+            if hasattr(self, 'client'):
+                del self.client
+            raise RuntimeError(f"Failed to initialize VectorStore: {str(e)}")
+    
+    # ... [keep all your existing methods unchanged] ...
         
     def store_analysis(self, invoice_id: str, invoice_text: str, 
                      analysis: AnalysisResult, employee_name: str) -> None:

@@ -1,9 +1,9 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import JSONResponse
-from app.services.pdf_processor import extract_text_from_pdf, process_zip_invoices, extract_amounts_from_text
-from app.services.llm_service import InvoiceAnalyzer
-from app.services.vector_store import VectorStore
-from app.models.schemas import InvoiceAnalysisRequest, ChatRequest, AnalysisResult,InvoiceResponse,ChatResponse
+from services.pdf_processor import extract_text_from_pdf, process_zip_invoices, extract_amounts_from_text
+from services.llm_service import InvoiceAnalyzer
+from services.vector_store import VectorStore
+from models.schemas import InvoiceAnalysisRequest, ChatRequest, AnalysisResult,InvoiceResponse,ChatResponse
 from typing import List
 import uuid
 from datetime import datetime

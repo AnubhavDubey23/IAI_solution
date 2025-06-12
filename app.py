@@ -5,10 +5,29 @@ from app.services.llm_service import InvoiceAnalyzer
 from app.services.vector_store import VectorStore
 import tempfile
 import uuid
+import os
+import sys
+import asyncio
+from pathlib import Path
+# Add this before initializing VectorStore in your app.py
+import shutil
+shutil.rmtree("./chroma_db", ignore_errors=True)  # Remove old database
 
-# Initialize components
-analyzer = InvoiceAnalyzer()
-vector_db = VectorStore()
+os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
+
+# Fix Windows event loop issue
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+sys.path.append(str(Path(__file__).parent))
+
+# Initialize components with error handling
+try:
+    analyzer = InvoiceAnalyzer()
+    vector_db = VectorStore()
+except Exception as e:
+    st.error(f"Failed to initialize system: {str(e)}")
+    st.stop()  # Prevent further execution
 
 # st.set_option('server.fileWatcherType', 'none')
 st.title("📄 IAI Invoice Reimbursement System")
