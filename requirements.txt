@@ -1,28 +1,23 @@
 # Core Libraries
-fastapi==0.115.9
-uvicorn== 0.34.3
-streamlit==1.45.1
-python-dotenv==1.0.1
+fastapi
+uvicorn
+streamlit
+# Core Packages
+langchain-core
+langchain-google-genai
 
-# LangChain Ecosystem
-langchain-google-genai==2.1.5
-langchain-core==0.3.65
-langchain-community==0.0.20
+python-dotenv
 
-# Google GenAI
-google-generativeai==0.8.5
-
+protobuf
 # PDF Processing
-PyPDF2==3.0.1
-
+PyPDF2
 # Vector Database
-chromadb==1.0.12
-sentence-transformers== 4.1.0
+chromadb
+sentence-transformers
 
 # Machine Learning
-torch==2.7.1
-
+torch
 # Additional Utilities
-requests==2.32.4
-python-multipart==0.0.20
-uuid==1.30
+requests
+python-multipart
+uuid
